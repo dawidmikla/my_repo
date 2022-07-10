@@ -3,6 +3,7 @@
 Created on Sat Apr 23 13:08:41 2022
 version 1.0.0.0
 @author: Dawid_PC
+feat Malgo i Rose
 """
 
 
