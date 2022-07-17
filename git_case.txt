@@ -1,0 +1,86 @@
+1. git status - sprawdzenie stanu drzewa
+
+2. git branch [nazwa brancha] - dodaje nowy branch o wskazanej nazwie (lokalnie)
+
+3. git checkout [nazwa brancha] - zmienia aktywny branch na wskazany (lokalnie)
+
+4. git add [nazwa pliku z rozszerzeniem] - dodaje nowy plik do aktywnego brancha (lokalnie)
+
+5. git rm [nazwa pliku z rozszerzeniem] - usuwa wskazany plik z aktywnego brancha (lokalnie)
+
+6. git commit -m "test cm - opis wprowadzonej zmiany"
+
+7. git push -u origin [nazwa brancha] - wypchnięcie zmian na wskazany branch na repo (na serwer)
+
+8. git merge [nazwa brancha] - łączy przez merge aktynwy branch ze wskazanym (lokalnie)
+
+9. git push -u origin main - wypchnięcie zmian na MAIN na repo (na serwer)
+
+10. git push origin --delete [nazwa brancha] - usuwa brancha (na serwerze)
+
+11. git checkout main - zmienia aktynwy branch na main (lokalnie)
+
+CASE A 
+Chcemy dodać plik 001.py do repo - tworząc branch, na koniec usuwając go.
+
+potrzebne kroki: 2,3,4,6,7,11,8,9,10
+git branch 001
+git checkout 001
+git add 001.py
+git commit -m "add new test file"
+git push -u origin 001
+git checkout main
+git merge 001
+git push -u origin main
+git push origin --delete 001
+
+CASE B 
+Chcemy usunąć plik 001.py do repo - tworząc branch, na koniec usuwając go.
+
+potrzebne kroki: 2,3,5,6,7,11,8,9,10
+git branch d_001
+git checkout d_001
+git rm 001.py
+git commit -m "removed test file"
+git push -u origin d_001
+git checkout main
+git merge d_001
+git push -u origin main
+git push origin --delete d_001
+
+CASE C 
+Musimy pracować równolegle nad plikami add_01 i add_02, na koniec przed wejściem na mastera wersje są łączone i wrzucane jako wspólne
+
+git branch add_01
+git checkout add_01
+git add add_01.py
+git commit -m "add new test file add_01"
+git push -u origin add_01
+
+git branch add_02
+git checkout add_02
+git add add_02.py
+git commit -m "add new test file add_02"
+git push -u origin add_02
+
+git checkout add_01
+git merge add_02
+
+git checkout main
+git merge add_01
+git push -u origin main
+git push origin --delete add_01
+git push origin --delete add_02
+
+CASE D 
+Wrzucam cały folder z zawaroscia
+
+git branch add_folder
+git checkout add_folder
+git add katalog_plikow
+git commit -m "add folder with files"
+git push -u origin add_folder
+git checkout main
+git merge add_folder
+git push -u main
+git push origin --delete add_folder
